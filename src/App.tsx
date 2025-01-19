@@ -5,7 +5,10 @@ import {
   Route,
   useNavigate,
 } from "react-router-dom";
-const ColorPicker = ({ onColorSelect }) => {
+interface ColorPickerProps {
+  onColorSelect: (color: string) => void;
+}
+const ColorPicker: React.FC<ColorPickerProps> = ({ onColorSelect }) => {
   const [selectedColor, setSelectedColor] = useState("#561ecb");
   const [showPalette, setShowPalette] = useState(false);
 
@@ -28,7 +31,7 @@ const ColorPicker = ({ onColorSelect }) => {
     "#9400D3",
   ];
 
-  const handleColorSelect = (color) => {
+  const handleColorSelect = (color: string) => {
     setSelectedColor(color);
   };
 
@@ -147,10 +150,9 @@ const Homepage = () => {
 const FortuneQuiz = () => {
   const navigate = useNavigate();
   const [currentStep, setCurrentStep] = useState(0);
-  const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [responses, setResponses] = useState([]);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [responses, setResponses] = useState<string[]>([]);
   const [showSummary, setShowSummary] = useState(false);
-  const [selectedColor, setSelectedColor] = useState("#561ecb");
 
   const questions = [
     {
@@ -181,7 +183,7 @@ const FortuneQuiz = () => {
     },
   ];
 
-  const handleAnswer = (answer) => {
+  const handleAnswer = (answer: string) => {
     setSelectedAnswer(answer);
   };
 
